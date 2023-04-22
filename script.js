@@ -1,27 +1,21 @@
-const input = document.getElementById("input");
-const submit = document.getElementById("submit");
-const result = document.getElementById("result");
 
-submit.addEventListener("click", function() {
-// Split the input string into an array of strings
-const ropes = input.value.split(',');
-
-// Convert the array of strings into an array of numbers
-const ropesArray = ropes.map(rope => parseInt(rope));
-
-// Sort the array in ascending order
-ropesArray.sort((a, b) => a - b);
-
-// Calculate the minimum cost of ropes
-let cost = 0;
-while (ropesArray.length > 1) {
-const first = ropesArray.shift();
-const second = ropesArray.shift();
-cost += first + second;
-ropesArray.unshift(first + second);
-ropesArray.sort((a, b) => a - b);
+function calculateMinCost() {
+  //your code here
+  let string = document.getElementById("rope-lengths").value
+	
+	let arr = string.split(",");
+	let finalValue =0;
+	while(arr.length > 1){
+		arr.sort((a,b) =>{return(a-b)});
+		let value = parseInt (arr.shift());
+		let value1 = parseInt(arr.shift());
+		let mainValue = value+value1;
+		finalValue = finalValue + mainValue;
+		arr.push(mainValue);
+		
+	}
+  let result = document.getElementById("result");
+	result.innerText = finalValue;
+	return finalValue;
+			
 }
-
-// Display the minimum cost of ropes
-result.innerHTML = `Minimum cost of ropes: ${cost}`;
-});
